@@ -1,3 +1,15 @@
-table th td{
-    width: 30%;
+.content-section{
+    width: 1170px;
+    margin:30px auto;
+}
+.card-form .p-card.p-component {
+    padding: 30px;
+    width: 1170px;
+    margin: 19px auto;
+}
+.card-form .p-inputtext{
+    width: 100%;
+}
+.card-form .p-float-label{
+    margin-bottom: 20px;
 }

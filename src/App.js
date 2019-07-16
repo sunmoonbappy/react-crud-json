@@ -1,57 +1,31 @@
 import React,{Component} from 'react';
-import './Table.css';
+
+import { BrowserRouter,Route } from 'react-router-dom'
+
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import "./Table.css";
+
+
+import Card from "./components/Card";
+import Table from "./Table";
+import Navigation from "./components/Navigation";
 
 class App extends React.Component{
-
-constructor(props){
-  super();
-  this.state = {
-    items:[],
-    isloaded:false,
-  }
-}
-
-componentDidMount(){
-  fetch('https://jsonplaceholder.typicode.com/posts')
-  .then(res => res.json())
-  .then(json => {
-    this.setState({
-      isloaded:true,
-      items:json,
-    })
-  });
-}
-
-  render(){
-    var { isloaded,items} = this.state;
-    if(!isloaded){
-      return <div>Loading ...</div>
-    }
-    else{
-      return (
-        <div className="App">
-          <table>
-            <thead>
-            <th>
-              <td>ID</td>
-              <td>Title</td>
-              <td>body</td>
-            </th>
-            </thead>
-            <tbody>
-              {items.map(item =>(
-                <tr>
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.body}</td>
-                </tr>
-              ))};
-            </tbody>
-          </table>
+    render(){
+      return(
+        <div className="content-section introduction">
+          <BrowserRouter>
+            <Route path="/" component={Navigation} />
+            <Route path="/table" component={Table} />
+            <Route path="/add-user" component={Card} />
+          </BrowserRouter>   
+          
         </div>
       )
     }
-  }
+
 }
 
 export default App;
