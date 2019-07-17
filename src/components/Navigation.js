@@ -16,7 +16,7 @@ class Navigation extends React.Component{
                 </div>
 
                 <div className="p-toolbar-group-right">
-                    <Link to="/add-user"><Button label="Add New" icon="pi pi-plus" className="p-button-success" style={{"margin-right" : '1.5em'}} /></Link>
+                    <Link to="/add-user"><Button label="Add New" icon="pi pi-plus" className="p-button-success" style={{"marginRight" : '1.5em'}} /></Link>
                     <Link to="/table"><Button label="Table" className="p-button-info" /></Link>
                 </div>
                 </Toolbar>
