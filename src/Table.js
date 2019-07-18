@@ -3,11 +3,12 @@ import { async } from 'q';
 import {DataTable} from 'primereact/datatable';
 import {Column} from 'primereact/column';
 import {InputText} from 'primereact/inputtext';
-import AddUser from './components/Navigation';
+import {Dialog} from 'primereact/dialog';
+import {Button} from 'primereact/button';
+import {RadioButton} from 'primereact/radiobutton';
 
 import './Table.css';
 
-import {Button} from 'primereact/button';
 
 class TableList extends React.Component{
      constructor(props){
@@ -46,7 +47,7 @@ class TableList extends React.Component{
     actionTemplate(rowData, column) {
         return <div>
             <Button type="button" icon="pi pi-search" className="p-button-success" style={{marginRight: '.5em'}}></Button>
-            <Button type="button" icon="pi pi-pencil" className="p-button-warning"></Button>
+            <Button type="button" icon="pi pi-pencil" className="p-button-warning" onClick={(e) => this.setState({visible: true})} ></Button>
         </div>;
     }
 
@@ -96,6 +97,11 @@ class TableList extends React.Component{
                 <Column field="userNote" header="userNote" sortable={true} filter={true} />
                 <Column body={this.actionTemplate} style={{textAlign:'center', width: '8em'}}/>
             </DataTable>
+
+            <Dialog header="User Information" visible={this.state.visible} style={{width: '50vw'}} modal={true} onHide={() => this.setState({visible: false})}>
+               
+            </Dialog>
+
         </div>
 
 

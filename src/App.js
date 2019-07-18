@@ -14,6 +14,7 @@ import './css/Primeflex.css';
 import Card from "./components/Card";
 import Post from "./Form/Post";
 import Table from "./Table";
+import Edit from './Form/Edit';
 import Navigation from "./components/Navigation";
 
 class App extends React.Component{
@@ -24,6 +25,7 @@ class App extends React.Component{
             <Route path="/" component={Navigation} />
             <Route path="/table" component={Table} />
             <Route path="/add-user" component={Post} />
+            <Route path="/edit-user" component={Edit} />
           </BrowserRouter>   
           
         </div>

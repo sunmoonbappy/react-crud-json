@@ -4,11 +4,9 @@ import {InputText} from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {RadioButton} from 'primereact/radiobutton';
-import axios from 'axios';
-const Base_URL ='http://192.168.31.52:8080/networld/add_user';
 
 const initstate = {
-    username: '',
+    userName: '',
     userPassword:'',
     userEmail:'',
     userActivity:'',
@@ -32,19 +30,35 @@ class Post extends React.Component{
     
      submitHandler = (event) => {
        event.preventDefault();
-       axios.post(`{Base_URL}/posts`,{
-           username:this.state.username,
-           userPassword:this.state.userPassword,
-           userEmail:this.state.userEmail,
-           userActivity:this.state.userActivity,
+
+       let postData = {
+        username:this.state.userName,
+        userPassword:this.state.userPassword,
+        userEmail:this.state.userEmail,
+        userActivity:this.state.userActivity,
+        userNote:this.state.userNote,
+       }
+       console.log(postData);
+       fetch(`http://192.168.31.52:8080/networld/add_user`,{
+           method:'POST',
+           headers:{
+            'Content-Type': 'application/json'
+          },
+           body: JSON.stringify(postData),
        })
-       .then(res =>{
-           this.setState({
-               isSubmitted:true,
-           })
-           console.log(res)
+
+       .then(function(response){
+            return response.json()
        })
-       .catch()
+
+       .then(function(data){
+            console.log("Data Successfully Submitted",data);
+        })
+
+        this.myForm.current.reset()
+        this.setState({
+        ... initstate
+        })
        
      }
 
@@ -59,9 +73,9 @@ class Post extends React.Component{
 
                             <div className="mb-15">
                                 <div className="p-col-md-12">
-                                <label htmlFor="username">Username</label>
+                                <label htmlFor="userName">Username</label>
                                 </div>
-                                <InputText id="username" value={this.state.username} size="60" name="username" onChange={ this.changeHandler } />
+                                <InputText id="userName" value={this.state.userName} size="60" name="userName" onChange={ this.changeHandler } />
                             </div>
 
                             <div className="mb-15">
@@ -84,12 +98,12 @@ class Post extends React.Component{
                                 </div>
                                 
                                 <div className="p-col-md-12">
-                                    <RadioButton id="active" value="active" name="userActivity" onChange={this.changeHandler} checked={this.state.userActivity === 'active'}  />
+                                    <RadioButton id="active" value="true" name="userActivity" onChange={this.changeHandler} checked={this.state.userActivity === 'true'}  />
                                     <label htmlFor="active" className="p-radiobutton-label">Active</label>
                                 </div>
 
                                 <div className="p-col-md-12">
-                                    <RadioButton id="inactive2" value="inactive" name="userActivity" onChange={this.changeHandler} checked={this.state.userActivity === 'inactive'} />
+                                    <RadioButton id="inactive2" value="false" name="userActivity" onChange={this.changeHandler} checked={this.state.userActivity === 'false'} />
                                     <label htmlFor="inactive2" className="p-radiobutton-label">InActive</label>
                                 </div>
                                 
